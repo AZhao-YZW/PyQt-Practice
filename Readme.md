@@ -22,3 +22,4 @@
 - [https://pypi.org/project/PyQt5/](https://pypi.org/project/PyQt5/)
 - [https://wiki.python.org/moin/PyQt](https://wiki.python.org/moin/PyQt)
 - [The complete PyQt5 tutorial — Create GUI applications with Python](https://www.pythonguis.com/pyqt5-tutorial/)
+- [16x16 icon](https://p.yusukekamiyamane.com/)
