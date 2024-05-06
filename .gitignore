@@ -1,2 +1,4 @@
 /qt_venv
 /test/official_example
+__pycache__
+*.png
