@@ -1,28 +1,7 @@
 from PyQt5.QtWidgets import (
     QApplication,
-    QCheckBox,
-    QComboBox,
-    QDateEdit,
-    QDateTimeEdit,
-    QDial,
-    QDoubleSpinBox,
-    QFontComboBox,
-    QLabel,
-    QLCDNumber,
-    QLineEdit,
     QMainWindow,
-    QProgressBar,
-    QPushButton,
-    QRadioButton,
-    QSlider,
-    QSpinBox,
-    QTimeEdit,
-    QVBoxLayout,
-    QHBoxLayout,
     QWidget,
-    QToolBar,
-    QAction,
-    QStatusBar,
 )
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QIcon
