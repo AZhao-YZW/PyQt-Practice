@@ -23,3 +23,4 @@
 - [https://wiki.python.org/moin/PyQt](https://wiki.python.org/moin/PyQt)
 - [The complete PyQt5 tutorial — Create GUI applications with Python](https://www.pythonguis.com/pyqt5-tutorial/)
 - [16x16 icon](https://p.yusukekamiyamane.com/)
+- [细致讲解python怎么做类型标注](http://www.coolpython.net/python_senior/data_type/py-type-hints-detail.html)

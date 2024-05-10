@@ -26,10 +26,12 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QIcon
+from typing import List, Optional
 from panel import LabelPanel, ChartPanel, ButtonPanel, DataPanel
 from menu import Menu
 from toolbar import ToolBar
 from navigation import TabNav
+from base import EasyLayout
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -50,55 +52,46 @@ class MainWindow(QMainWindow):
         toolbar = ToolBar(self)
     
     def _main_area_init(self):
-        '''
-        w_main_area [QVBoxLayout] (top)
-        |-- w_tab_nav
-        |-- (w_tab_1) [QVBoxLayout] (其由w_tab_nav管理, 不加入w_main_area)
-            |-- w_panel [QVBoxLayout]
-                |-- w_chart_panel
-                |-- w_panel_sub_1 [QHBoxLayout]
-                    |-- w_button_panel
-                    |-- w_label_panel
-        |-- (w_tab_2) [QVBoxLayout]
-            |-- w_data_panel
-        '''
         # component
         tab_nav = TabNav()
         chart_panel = ChartPanel()
         button_panel = ButtonPanel()
         label_panel = LabelPanel()
         data_panel = DataPanel()
-        # layout
-        layout_main = QVBoxLayout()
-        layout_tab_1 = QVBoxLayout()
-        layout_tab_2 = QVBoxLayout()
-        layout_panel = QVBoxLayout()
-        layout_panel_sub_1 = QHBoxLayout()
         # widget
         w_main_area = QWidget()
-        w_panel = QWidget()
-        w_panel_sub_1 = QWidget()
-        w_tab_1 = tab_nav.get_tab_widget('Tab1')
-        w_tab_2 = tab_nav.get_tab_widget('Tab2')
-        w_main_area.setLayout(layout_main)
-        w_panel.setLayout(layout_panel)
-        w_panel_sub_1.setLayout(layout_panel_sub_1)
-        w_tab_1.setLayout(layout_tab_1)
-        w_tab_2.setLayout(layout_tab_2)
-        w_tab_nav = tab_nav.get_widget()
-        w_chart_panel = chart_panel.get_widget()
-        w_button_panel = button_panel.get_widget()
-        w_label_panel = label_panel.get_widget()
-        w_data_panel = data_panel.get_widget()
-        # set widget
+        # layout list
+        '''
+        main_area [QVBoxLayout] (top)
+        |-- tab_nav
+        |-- (tab_1) [QVBoxLayout] (其由tab_nav管理, 不加入main_area)
+            |-- panel [QVBoxLayout]
+                |-- chart_panel
+                |-- panel_sub_1 [QHBoxLayout]
+                    |-- button_panel
+                    |-- label_panel
+        |-- (tab_2) [QVBoxLayout]
+            |-- data_panel
+        '''
+        layout_list: List[List[QWidget, str, Optional[str], Optional[str]]] = [
+            [tab_nav.get_widget(),           'tab_nav',      'main_area'      ],
+            [tab_nav.get_tab_widget('Tab1'), 'tab_1',        None,         'v'],
+            [QWidget(),                      'panel',        'tab_1',      'v'],
+            [chart_panel.get_widget(),       'chart_panel',  'panel'          ],
+            [QWidget(),                      'panel_sub_1',  'panel',      'h'],
+            [button_panel.get_widget(),      'button_panel', 'panel_sub_1'    ],
+            [label_panel.get_widget(),       'label_panel',  'panel_sub_1'    ],
+            [tab_nav.get_tab_widget('Tab2'), 'tab_2',        None,         'v'],
+            [data_panel.get_widget(),        'data_panel',   'tab_2'          ],
+        ]
+        # easy layout
+        easy_layout = EasyLayout(w_main_area, 'main_area', 'v')
+        for layout in layout_list:
+            if len(layout) == 4:
+                easy_layout.add_widget(layout[0], layout[1], layout[2], layout[3])
+            else:
+                easy_layout.add_widget(layout[0], layout[1], layout[2])
         self.setCentralWidget(w_main_area)
-        layout_main.addWidget(w_tab_nav)
-        layout_tab_1.addWidget(w_panel)
-        layout_panel.addWidget(w_chart_panel)
-        layout_panel.addWidget(w_panel_sub_1)
-        layout_panel_sub_1.addWidget(w_button_panel)
-        layout_panel_sub_1.addWidget(w_label_panel)
-        layout_tab_2.addWidget(w_data_panel)
 
 def app_main_window():
     app = QApplication([])
