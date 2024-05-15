@@ -2,8 +2,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from base import EasyLayout, ELList, FlexWindow
 from menu import Menu
 from toolbar import ToolBar
-from page import TestPage
-from navigation import TabNav
+from page import TestPage, TabNav
 from panel import DataPanel
 
 class MainWindow(QMainWindow):
@@ -30,7 +29,7 @@ class MainWindow(QMainWindow):
         # top widget
         w_main_area = QWidget()
         # component
-        tab_nav = TabNav()
+        tab_nav = TabNav(['Tab1', 'Tab2', 'Tab3'], 'Tab1', 'n', True)
         test_page = TestPage()
         data_panel = DataPanel()
         # easy layout list
