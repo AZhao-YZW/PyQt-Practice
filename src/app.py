@@ -1,17 +1,10 @@
-from PyQt5.QtWidgets import (
-    QApplication,
-    QMainWindow,
-    QWidget,
-)
-from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtGui import QIcon
-from typing import List, Optional
-from panel import DataPanel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
+from base import EasyLayout, ELList, FlexWindow
 from menu import Menu
 from toolbar import ToolBar
-from navigation import TabNav
-from base import EasyLayout, ELList
 from page import TestPage
+from navigation import TabNav
+from panel import DataPanel
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -22,8 +15,10 @@ class MainWindow(QMainWindow):
         self._main_area_init()
     
     def _window_init(self):
-        self.setWindowTitle('My First PyQt5 App')
-        self.setFixedSize(QSize(800, 600))
+        flex_window = FlexWindow(self)
+        flex_window.set_title('My First PyQt5 App')
+        # flex_window.set_fixed_size(QSize(800, 600))
+        flex_window.set_flex_size(0.5, 0.5)
 
     def _menu_init(self):
         menu = Menu(self)
