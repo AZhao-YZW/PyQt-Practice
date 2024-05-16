@@ -20,11 +20,12 @@ class ELList:
     el_list: List[List[ELNode]]
 
 class EasyLayout:
-    def __init__(self, top: QWidget, top_name: str, layout_type: str = 'v'):
+    def __init__(self, top: QWidget, top_name: str = 'top_widget', layout_type: str = 'v'):
         widget_node = WidgetNode(top, top_name, self._get_layout(layout_type),
                                  None, None)
         widget_node.widget.setLayout(widget_node.layout)
         self._layout_list = [widget_node]
+        self._top_name = top_name
 
     def _get_layout(self, layout_type: str):
         if layout_type == 'v':
@@ -54,7 +55,7 @@ class EasyLayout:
 
     def _add_to_layout_list(self, node: WidgetNode):
         if self._is_name_exist(node.widget_name):
-            print('[EasyLayout] add node failed, as widget name has exist.')
+            print('[EasyLayout] add node failed, as widget name[%s] has exist.' % node.widget_name)
             return
         if node.parent is not None:
             parent_layout = self._get_widget_layout(node.parent_name)
@@ -69,6 +70,10 @@ class EasyLayout:
                                  self._get_widget(parent_name), parent_name)
         self._add_to_layout_list(widget_node)
 
-    def add_muti_widgets(self, el_list: ELList):
-        for el_node in el_list:
-            self.add_widget(*el_node)
+    def add_muti_widgets(self, el_list: ELList, parent_top: bool = False):
+        if parent_top is False:
+            for el_node in el_list:
+                self.add_widget(*el_node)
+        else:
+            for el_node in el_list:
+                self.add_widget(*el_node, self._top_name)
