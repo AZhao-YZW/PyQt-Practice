@@ -49,7 +49,7 @@ class MainWindow(QMainWindow):
             [data_panel.get_widget(),        'data_panel',   'tab_2'          ],
         ]
         # easy layout
-        easy_layout = EasyLayout(w_main_area, 'main_area', 'v')
+        easy_layout = EasyLayout(w_main_area, 'v', 'main_area')
         easy_layout.add_muti_widgets(el_list)
         self.setCentralWidget(w_main_area)
 

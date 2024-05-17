@@ -1,5 +1,11 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
+from PyQt5.QtWidgets import (
+    QWidget, QLabel, QPushButton, QCheckBox, QLineEdit,
+    QListWidget, QRadioButton
+)
+from PyQt5.QtGui import QPixmap, QImage
+from PyQt5.QtCore import Qt
 from base import EasyLayout, ELList
+from panel import ChartPanel
 
 class TestPage:
     '''
@@ -34,7 +40,7 @@ class TestPage:
             [self._get_single_select_widget(), 'single_select', 'colume_3'],
         ]
         # easy layout
-        easy_layout = EasyLayout(self.w_test_page, 'test_page', 'h')
+        easy_layout = EasyLayout(self.w_test_page, 'h', 'test_page')
         easy_layout.add_muti_widgets(el_list)
     
     def _get_text_widget(self):
@@ -57,37 +63,63 @@ class TestPage:
     
     def _get_picture_widget(self):
         el_list: ELList = [
-            [QLabel('图像：'), 'label_picture'],
+            [QLabel('静态图像：'), 'label_picture'],
         ]
         return self._get_widget_common('v', el_list)
     
     def _get_input_widget(self):
         el_list: ELList = [
             [QLabel('输入框：'), 'label_input'],
+            [QLineEdit(), 'input'],
         ]
         return self._get_widget_common('v', el_list)
     
     def _get_list_widget(self):
+        list_widget = QListWidget()
+        list_widget.addItems(['Apple', 'Pear', 'Banana'])
         el_list: ELList = [
             [QLabel('列表：'), 'label_list'],
+            [list_widget, 'list'],
         ]
         return self._get_widget_common('v', el_list)
     
     def _get_chart_widget(self):
         el_list: ELList = [
             [QLabel('图表：'), 'label_chart'],
+            [ChartPanel().get_widget(), 'chart'],
         ]
         return self._get_widget_common('v', el_list)
     
     def _get_muti_select_widget(self):
         el_list: ELList = [
             [QLabel('多选框：'), 'label_m_select'],
+            [QWidget(), 'example', EasyLayout.DEFAULT_TOP_NAME, 'h'],
+            [QCheckBox('选项1'), 'item_1', 'example'],
+            [QCheckBox('选项2'), 'item_2', 'example'],
+            [QCheckBox('选项3'), 'item_3', 'example'],
         ]
         return self._get_widget_common('v', el_list)
     
     def _get_single_select_widget(self):
+        # QRadioButton在同一个layout下视为同一组
+        item_A = QRadioButton('选项A')
+        item_B = QRadioButton('选项B')
+        item_C = QRadioButton('选项C')
+        item_D = QRadioButton('选项D')
+        item_E = QRadioButton('选项E')
+        item_F = QRadioButton('选项F')
         el_list: ELList = [
             [QLabel('单选框：'), 'label_s_select'],
+            [QLabel('第1题：'), 'label_1'],
+            [QWidget(), 'example_1', EasyLayout.DEFAULT_TOP_NAME, 'h'],
+            [item_A, 'item_A', 'example_1'],
+            [item_B, 'item_B', 'example_1'],
+            [item_C, 'item_C', 'example_1'],
+            [QLabel('第2题：'), 'label_2'],
+            [QWidget(), 'example_2', EasyLayout.DEFAULT_TOP_NAME, 'h'],
+            [item_D, 'item_D', 'example_2'],
+            [item_E, 'item_E', 'example_2'],
+            [item_F, 'item_F', 'example_2'],
         ]
         return self._get_widget_common('v', el_list)
     

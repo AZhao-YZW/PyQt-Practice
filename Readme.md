@@ -25,3 +25,4 @@
 - [16x16 icon](https://p.yusukekamiyamane.com/)
 - [细致讲解python怎么做类型标注](http://www.coolpython.net/python_senior/data_type/py-type-hints-detail.html)
 - [Python中类属性和实例属性的区别](https://zhuanlan.zhihu.com/p/624007920)
+- [小白白也能学会的 PyQt 教程 —— 图像类及图像相关基础类介绍](https://cloud.tencent.com/developer/article/2289417)

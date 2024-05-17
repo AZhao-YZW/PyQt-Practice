@@ -20,7 +20,9 @@ class ELList:
     el_list: List[List[ELNode]]
 
 class EasyLayout:
-    def __init__(self, top: QWidget, top_name: str = 'top_widget', layout_type: str = 'v'):
+    DEFAULT_TOP_NAME = 'top_widget'
+
+    def __init__(self, top: QWidget, layout_type: str = 'v', top_name: str = DEFAULT_TOP_NAME):
         widget_node = WidgetNode(top, top_name, self._get_layout(layout_type),
                                  None, None)
         widget_node.widget.setLayout(widget_node.layout)
@@ -71,9 +73,11 @@ class EasyLayout:
         self._add_to_layout_list(widget_node)
 
     def add_muti_widgets(self, el_list: ELList, parent_top: bool = False):
-        if parent_top is False:
-            for el_node in el_list:
-                self.add_widget(*el_node)
-        else:
-            for el_node in el_list:
+        for el_node in el_list:
+            if (parent_top is True) and (len(el_node) == 2):
                 self.add_widget(*el_node, self._top_name)
+            else:
+                self.add_widget(*el_node)
+
+    def get_top_name(self):
+        return self._top_name
