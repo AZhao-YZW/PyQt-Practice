@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt
 from base import EasyLayout, ELList
 from panel import ChartPanel
 
+
 class TestPage:
     '''
     test_page [QHBoxLayout]
@@ -22,6 +23,7 @@ class TestPage:
         |-- muti_select
         |-- single_select
     '''
+
     def __init__(self):
         # top widget
         self.w_test_page = QWidget()
@@ -42,38 +44,65 @@ class TestPage:
         # easy layout
         easy_layout = EasyLayout(self.w_test_page, 'h', 'test_page')
         easy_layout.add_muti_widgets(el_list)
-    
+
     def _get_text_widget(self):
+        self.text_1 = QLabel('text_1')
+        self.text_2 = QLabel('text_2')
+        self.text_3 = QLabel('text_3')
         el_list: ELList = [
             [QLabel('静态文本：'), 'label_text'],
-            [QLabel('text_1'), 'text_1'],
-            [QLabel('text_2'), 'text_2'],
-            [QLabel('text_3'), 'text_3'],
+            [self.text_1, 'text_1'],
+            [self.text_2, 'text_2'],
+            [self.text_3, 'text_3'],
         ]
         return self._get_widget_common('v', el_list)
-    
+
+    def _get_text_n(self, name: str):
+        if name == 'text_1':
+            return self.text_1
+        elif name == 'text_2':
+            return self.text_2
+        elif name == 'text_3':
+            return self.text_3
+
     def _get_button_widget(self):
+        def on_click_button(name: str):
+            text = self._get_text_n(name)
+            content = text.text()
+            splits = content.split(': ')
+            if len(splits) == 1:
+                new_content = content + ': 1'
+            else:
+                new_content = splits[0] + ': ' + str(int(splits[1]) + 1)
+            text.setText(new_content)
+
+        button_1 = QPushButton('button_1')
+        button_2 = QPushButton('button_2')
+        button_3 = QPushButton('button_3')
+        button_1.clicked.connect(lambda: on_click_button('text_1'))
+        button_2.clicked.connect(lambda: on_click_button('text_2'))
+        button_3.clicked.connect(lambda: on_click_button('text_3'))
         el_list: ELList = [
             [QLabel('按钮：'), 'label_button'],
-            [QPushButton('button_1'), 'button_1'],
-            [QPushButton('button_2'), 'button_2'],
-            [QPushButton('button_3'), 'button_3'],
+            [button_1, 'button_1'],
+            [button_2, 'button_2'],
+            [button_3, 'button_3'],
         ]
         return self._get_widget_common('v', el_list)
-    
+
     def _get_picture_widget(self):
         el_list: ELList = [
             [QLabel('静态图像：'), 'label_picture'],
         ]
         return self._get_widget_common('v', el_list)
-    
+
     def _get_input_widget(self):
         el_list: ELList = [
             [QLabel('输入框：'), 'label_input'],
             [QLineEdit(), 'input'],
         ]
         return self._get_widget_common('v', el_list)
-    
+
     def _get_list_widget(self):
         list_widget = QListWidget()
         list_widget.addItems(['Apple', 'Pear', 'Banana'])
@@ -82,14 +111,14 @@ class TestPage:
             [list_widget, 'list'],
         ]
         return self._get_widget_common('v', el_list)
-    
+
     def _get_chart_widget(self):
         el_list: ELList = [
             [QLabel('图表：'), 'label_chart'],
             [ChartPanel().get_widget(), 'chart'],
         ]
         return self._get_widget_common('v', el_list)
-    
+
     def _get_muti_select_widget(self):
         el_list: ELList = [
             [QLabel('多选框：'), 'label_m_select'],
@@ -99,7 +128,7 @@ class TestPage:
             [QCheckBox('选项3'), 'item_3', 'example'],
         ]
         return self._get_widget_common('v', el_list)
-    
+
     def _get_single_select_widget(self):
         # QRadioButton在同一个layout下视为同一组
         item_A = QRadioButton('选项A')
@@ -122,7 +151,7 @@ class TestPage:
             [item_F, 'item_F', 'example_2'],
         ]
         return self._get_widget_common('v', el_list)
-    
+
     def _get_widget_common(self, top_layout: str, el_list: ELList) -> QWidget:
         widget = QWidget()
         easy_layout = EasyLayout(widget, top_layout)
