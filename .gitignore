@@ -1,5 +1,8 @@
 /qt_venv
 /test/official_example
+/pyside_qml/ui_tutorial/
+/pyside_qml/qrc_tutorial/
+/pyside_qml/qml_tutorial/
 __pycache__
 *.png
 *.jpg
