@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QAction, QMainWindow
-from PyQt5.QtGui import QIcon
+from PySide6.QtWidgets import QMainWindow
+from PySide6.QtGui import QAction, QIcon
 
 class PublicAction:
     def __init__(self, window: QMainWindow):

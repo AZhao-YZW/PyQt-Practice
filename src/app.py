@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget
 from base import EasyLayout, ELList, FlexWindow
 from menu import Menu
 from toolbar import ToolBar
@@ -15,9 +15,10 @@ class MainWindow(QMainWindow):
     
     def _window_init(self):
         flex_window = FlexWindow(self)
-        flex_window.set_title('My First PyQt5 App')
+        flex_window.set_title('My First PySide6 App')
         # flex_window.set_fixed_size(QSize(800, 600))
         flex_window.set_flex_size(0.5, 0.5)
+        # flex_window.set_frameless_theme()
 
     def _menu_init(self):
         menu = Menu(self)

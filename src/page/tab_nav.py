@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTabWidget, QWidget
+from PySide6.QtWidgets import QTabWidget, QWidget
 from typing import Dict, List
 
 class TabNav:

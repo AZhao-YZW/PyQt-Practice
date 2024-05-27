@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLayout
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLayout
 from typing import Optional, List
 
 class WidgetNode:

@@ -4,6 +4,7 @@
 /pyside_qml/qrc_tutorial/
 /pyside_qml/qml_tutorial/
 /pyside_qml/qss_tutorial/
+/src/output/
 __pycache__
 *.png
 *.jpg

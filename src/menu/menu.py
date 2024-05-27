@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QStatusBar, QMainWindow
+from PySide6.QtWidgets import QStatusBar, QMainWindow
 from base import PublicAction
 
 class Menu:

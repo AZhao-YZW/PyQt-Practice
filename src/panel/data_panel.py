@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QVBoxLayout, QHBoxLayout, QWidget
+from PySide6.QtWidgets import QLabel, QVBoxLayout, QHBoxLayout, QWidget
 
 class DataPanel:
     def __init__(self):

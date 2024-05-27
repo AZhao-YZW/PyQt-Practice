@@ -1,5 +1,5 @@
 # 设计目标
-1. 设计一个PyQt5实现的GUI
+1. 设计一个PyQt5实现的GUI --> 转为使用PySide6实现
 2. 包含功能:
    - 静态文本、按扭、图像、输入框、列表、图表、多选框、单选框
    - 选项卡(实现多窗口)、图表与数据关联、数据导入和导出
@@ -17,6 +17,13 @@
    - 工业设备有线调试
    - 数据分析
 
+# windows打包.exe
+```sh
+pip install pyinstaller
+pip install auto-py-to-exe
+auto-py-to-exe
+```
+
 # 参考资料
 - [PyQt vs PySide 对比](https://geek-docs.com/pyqt/pyqt-questions/134_pyqt_pyqt_vs_pyside_comparison.html)
 - [https://pypi.org/project/PyQt5/](https://pypi.org/project/PyQt5/)
@@ -29,3 +36,4 @@
 - [小白白也能学会的 PyQt 教程 —— 图像类及图像相关基础类介绍](https://cloud.tencent.com/developer/article/2289417)
 - [一篇文章让你读懂PyQt5布局管理，绝对干货](https://cloud.tencent.com/developer/article/1437295)
 - [全面认识 Qt Widgets、QML、Qt Quick](https://zhuanlan.zhihu.com/p/634276734)
+- [Pyside | PYQT无边框设计，窗口移动和调整大小的简单写法](https://blog.csdn.net/CoderDeer/article/details/133361861)
