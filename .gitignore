@@ -3,6 +3,7 @@
 /pyside_qml/ui_tutorial/
 /pyside_qml/qrc_tutorial/
 /pyside_qml/qml_tutorial/
+/pyside_qml/qss_tutorial/
 __pycache__
 *.png
 *.jpg
