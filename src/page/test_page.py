@@ -4,9 +4,9 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QPixmap, QImage
 from PySide6.QtCore import Qt
-from base import EasyLayout, ELList
+from base import EasyLayout, ELList, EventMaster
 from panel import ChartPanel
-
+import subprocess, os
 
 class TestPage:
     '''
@@ -44,6 +44,29 @@ class TestPage:
         # easy layout
         easy_layout = EasyLayout(self.w_test_page, 'h', 'test_page')
         easy_layout.add_muti_widgets(el_list)
+        # event master
+        self._event_init()
+
+    def _event_init(self):
+        def on_click_button(label: QLabel):
+            text = label
+            content = text.text()
+            splits = content.split(': ')
+            if len(splits) == 1:
+                new_content = content + ': 1'
+            else:
+                new_content = splits[0] + ': ' + str(int(splits[1]) + 1)
+            text.setText(new_content)
+            app_path = os.getcwd()
+            subprocess.run(['python', app_path + '/script/print_hello.py'])
+        
+        event_master = EventMaster()
+        event_master.set_subject('button_1', self.button_1.clicked.connect)
+        event_master.set_observer('text_1', 'button_1', on_click_button, [self.text_1])
+        event_master.set_subject('button_2', self.button_2.clicked.connect)
+        event_master.set_observer('text_2', 'button_2', on_click_button, [self.text_2])
+        event_master.set_subject('button_3', self.button_3.clicked.connect)
+        event_master.set_observer('text_3', 'button_3', on_click_button, [self.text_3])
 
     def _get_text_widget(self):
         self.text_1 = QLabel('text_1')
@@ -57,36 +80,15 @@ class TestPage:
         ]
         return self._get_widget_common('v', el_list)
 
-    def _get_text_n(self, name: str):
-        if name == 'text_1':
-            return self.text_1
-        elif name == 'text_2':
-            return self.text_2
-        elif name == 'text_3':
-            return self.text_3
-
     def _get_button_widget(self):
-        def on_click_button(name: str):
-            text = self._get_text_n(name)
-            content = text.text()
-            splits = content.split(': ')
-            if len(splits) == 1:
-                new_content = content + ': 1'
-            else:
-                new_content = splits[0] + ': ' + str(int(splits[1]) + 1)
-            text.setText(new_content)
-
-        button_1 = QPushButton('button_1')
-        button_2 = QPushButton('button_2')
-        button_3 = QPushButton('button_3')
-        button_1.clicked.connect(lambda: on_click_button('text_1'))
-        button_2.clicked.connect(lambda: on_click_button('text_2'))
-        button_3.clicked.connect(lambda: on_click_button('text_3'))
+        self.button_1 = QPushButton('button_1')
+        self.button_2 = QPushButton('button_2')
+        self.button_3 = QPushButton('button_3')
         el_list: ELList = [
             [QLabel('按钮：'), 'label_button'],
-            [button_1, 'button_1'],
-            [button_2, 'button_2'],
-            [button_3, 'button_3'],
+            [self.button_1, 'button_1'],
+            [self.button_2, 'button_2'],
+            [self.button_3, 'button_3'],
         ]
         return self._get_widget_common('v', el_list)
 

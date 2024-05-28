@@ -37,3 +37,4 @@ auto-py-to-exe
 - [一篇文章让你读懂PyQt5布局管理，绝对干货](https://cloud.tencent.com/developer/article/1437295)
 - [全面认识 Qt Widgets、QML、Qt Quick](https://zhuanlan.zhihu.com/p/634276734)
 - [Pyside | PYQT无边框设计，窗口移动和调整大小的简单写法](https://blog.csdn.net/CoderDeer/article/details/133361861)
+- [6个例子快速学会python中subprocess库的使用](https://blog.csdn.net/Light2077/article/details/110913337)
